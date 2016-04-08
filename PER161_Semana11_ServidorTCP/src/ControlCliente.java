@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Observable;
@@ -13,9 +14,13 @@ public class ControlCliente extends Observable implements Runnable {
 		
 		OutputStream salida;
 		try {
+			
 			salida = s.getOutputStream();
-			salida.write("buenos dias".getBytes());
-			salida.flush();
+			ObjectOutputStream salidaObjetos =  new ObjectOutputStream(salida);			
+			salidaObjetos.writeObject(new String("hola amiwito"));
+			salidaObjetos.flush();
+			//salida.write("buenos dias".getBytes());
+			//salida.flush();
 		} catch (IOException e) {			
 			e.printStackTrace();
 		}		
